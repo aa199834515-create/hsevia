@@ -6,6 +6,10 @@ import pandas as pd
 import streamlit as st
 from db import init_db, insert_report, query_reports
 
+# Branding
+PRIMARY_COLOR = "#0b6e4f"  # green
+ACCENT_COLOR = "#f2f7f4"
+
 # Constants
 DB_PATH = "hsevia.db"
 UPLOAD_DIR = "uploads"
@@ -14,14 +18,46 @@ MAX_UPLOAD_SIZE = 5 * 1024 * 1024  # 5 MB
 # Ensure upload dir exists
 os.makedirs(UPLOAD_DIR, exist_ok=True)
 
-st.set_page_config(page_title="HSEvia - HSE Portal", layout="wide")
+st.set_page_config(page_title="HSEvia - HSE Portal", layout="wide", page_icon="assets/logo.svg")
 
 # Initialize DB
 init_db(DB_PATH)
 
-# Sidebar navigation
+# Inject simple CSS for branding
+st.markdown(f"""
+<style>
+    .header-title {{
+        color: {PRIMARY_COLOR};
+        font-family: 'Arial', sans-serif;
+        font-size:36px;
+        font-weight:700;
+        margin: 0;
+        padding: 0;
+    }}
+    .header-sub {{
+        color: #555;
+        font-size:14px;
+        margin-top:4px;
+    }}
+    .stButton>button {
+        background-color: {PRIMARY_COLOR};
+        color: white;
+        border-radius: 6px;
+    }
+</style>
+""", unsafe_allow_html=True)
+
+# Header with logo
+header_cols = st.columns([1, 6, 1])
+with header_cols[0]:
+    st.image("assets/logo.svg", width=90)
+with header_cols[1]:
+    st.markdown("<div class='header-title'>HSEvia</div><div class='header-sub'>Health, Safety & Environment Portal</div>", unsafe_allow_html=True)
+with header_cols[2]:
+    st.markdown("\n")
+
 st.sidebar.title("HSEvia")
-page = st.sidebar.radio("Go to", ["Home", "Report Incident", "Reports (Admin)", "Resources"])
+page = st.sidebar.radio("Go to", ["Home", "Report Incident", "Reports (Admin)", "Resources"]) 
 
 # Helper to show report details
 def show_report_details(r):

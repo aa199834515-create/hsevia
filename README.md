@@ -1,6 +1,6 @@
 # HSEvia
 
-This branch contains a simple Streamlit-based HSE portal.
+This branch contains a Streamlit-based HSE portal with branding (logo and basic color theme).
 
 Run locally:
 
@@ -21,4 +21,4 @@ Run locally:
 Notes:
 - A SQLite database `hsevia.db` will be created in the repo root on first run.
 - Uploaded attachments are saved to the `uploads/` directory (this folder is gitignored).
-- Do NOT commit your admin password; set it as an environment variable or use Streamlit secrets in production.
+- The logo is in assets/logo.svg and used as the page icon and header image.
