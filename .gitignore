@@ -1,0 +1,5 @@
+# Byte and database files
+uploads/
+*.db
+.env
+__pycache__/
